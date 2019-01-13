@@ -1,9 +1,19 @@
-; Infinite loop (e9 fd ff)
-loop:
-    jmp loop
+mov ah, 0x0e ; tty mode
+mov al, 'H'
+int 0x10
+mov al, 'e'
+mov bl, 14
+int 0x10
+mov al, 'l'
+int 0x10
+int 0x10
+mov al, 'o'
+int 0x10
 
-; Fill 510 zeros minus the size of previous code
+jmp $ ; jump to current address (infinite loop)
+
+; padding and magic number
 times 510-($-$$) db 0
-
-; Magic number (checks for assembler)
 dw 0xaa55
+
+
